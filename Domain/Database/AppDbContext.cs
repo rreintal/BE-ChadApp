@@ -7,6 +7,7 @@ namespace Domain;
 public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 {
     public DbSet<AppUser> AppUsers { get; set; } = default!;
+    public DbSet<AppRefreshToken> RefreshTokens { get; set; } = default!;
     
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

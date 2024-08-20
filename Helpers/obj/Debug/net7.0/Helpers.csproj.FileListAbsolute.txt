@@ -10,3 +10,15 @@
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Helpers/obj/Debug/net7.0/refint/Helpers.dll
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Helpers/obj/Debug/net7.0/Helpers.pdb
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Helpers/obj/Debug/net7.0/ref/Helpers.dll
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/bin/Debug/net7.0/Helpers.deps.json
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/bin/Debug/net7.0/Helpers.dll
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/bin/Debug/net7.0/Helpers.pdb
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.csproj.AssemblyReference.cache
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.GeneratedMSBuildEditorConfig.editorconfig
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.AssemblyInfoInputs.cache
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.AssemblyInfo.cs
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.csproj.CoreCompileInputs.cache
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.dll
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/refint/Helpers.dll
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/Helpers.pdb
+/Users/richardreintal/RiderProjects/BE-ChadApp/Helpers/obj/Debug/net7.0/ref/Helpers.dll

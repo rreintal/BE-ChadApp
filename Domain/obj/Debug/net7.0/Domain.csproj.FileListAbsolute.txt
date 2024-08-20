@@ -23,3 +23,6 @@
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Domain/obj/Debug/net7.0/Domain.pdb
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Domain/obj/Debug/net7.0/Domain.genruntimeconfig.cache
 /Users/richardreintal/RiderProjects/BE-TrainingApp/Domain/obj/Debug/net7.0/ref/Domain.dll
+/Users/richardreintal/RiderProjects/BE-ChadApp/Domain/bin/Debug/net7.0/Domain.runtimeconfig.json
+/Users/richardreintal/RiderProjects/BE-ChadApp/Domain/obj/Debug/net7.0/Domain.csproj.AssemblyReference.cache
+/Users/richardreintal/RiderProjects/BE-ChadApp/Domain/obj/Debug/net7.0/Domain.genruntimeconfig.cache

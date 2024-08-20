@@ -1,11 +1,11 @@
+using Domain.Database.Contracts;
+
 namespace Domain;
 
-public class AppRefreshToken
+public class AppRefreshToken : DomainEntity
 {
     public Guid AppUserId { get; set; }
     public AppUser? AppUser { get; set; }
-    
-    public Guid Id { get; set; }
     public string JWT { get; set; } = default!;
     public string RefreshToken { get; set; } = Guid.NewGuid().ToString();
 
