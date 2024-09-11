@@ -2,14 +2,14 @@ namespace Domain.Database.Contracts;
 
 
 public interface IBaseRepository<TEntity> : IBaseRepository<TEntity, Guid>
-where TEntity : class, IDomainEntity<Guid>
+where TEntity : class, IDomainEntityId<Guid>
 {
     
 }
 
 public interface IBaseRepository<TEntity, TKey>
     where TKey : struct
-    where TEntity : class, IDomainEntity<TKey>
+    where TEntity : class, IDomainEntityId<TKey>
 {
     public Task<TEntity?> FindAsync(TKey id);
     public TEntity Delete(TEntity entity);

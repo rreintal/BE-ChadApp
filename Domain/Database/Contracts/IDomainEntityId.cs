@@ -1,11 +1,11 @@
 namespace Domain.Database.Contracts;
 
-public interface IDomainEntity : IDomainEntity<Guid>
+public interface IDomainEntityId : IDomainEntityId<Guid>
 {
     
 }
 
-public interface IDomainEntity<TKey>
+public interface IDomainEntityId<TKey>
 where TKey : struct
 {
     public TKey Id { get; set; }

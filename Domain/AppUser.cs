@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Domain;
 
-public class AppUser : IdentityUser<Guid>, IDomainEntity<Guid>
+public class AppUser : IdentityUser<Guid>, IDomainEntityId<Guid>
 {
     public ICollection<AppRefreshToken>? AppRefreshTokens { get; set; }
 }

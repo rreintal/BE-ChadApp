@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Domain.Database.Base;
 
 public class BaseRepository<TDBContext, TEntity> : IBaseRepository<TEntity>
-    where TEntity : class, IDomainEntity<Guid>
+    where TEntity : class, IDomainEntityId<Guid>
     where TDBContext : AppDbContext
 {
 
