@@ -10,18 +10,7 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 {
     public DbSet<AppUser> AppUsers { get; set; } = default!;
     public DbSet<AppRefreshToken> RefreshTokens { get; set; } = default!;
-    public DbSet<Exercise> Exercises { get; set; } = default!;
-    public DbSet<TrainingDay> TrainingDays { get; set; } = default!;
-    public DbSet<TrainingDayExercise> TrainingDayExercises { get; set; } = default!;
-    public DbSet<TrainingPlan> TrainingPlans { get; set; } = default!;
-    public DbSet<TrainingSession> TrainingSessions { get; set; } = default!;
-    public DbSet<TrainingSessionExercise> TrainingSessionExercises { get; set; } = default!;
-    public DbSet<TrainingSessionSet> TrainingSessionSets { get; set; } = default!;
-    
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-        ;
-    }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -44,13 +33,6 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
                     case EntityState.Added:
                         entity.CreatedAt = now;
                         break;
-
-                    /*
-                    case EntityState.Modified:
-                        Entry(entity).Property(x => x.CreatedDate).IsModified = false;
-                        entity.UpdatedDate = now;
-                        break;
-                        */
                 }
             }
         }
@@ -68,7 +50,6 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
 
     private void ConfigureCreatedAtForEntities(ModelBuilder builder)
     {
-        // Apply configuration to all entities inheriting from DomainEntity
         foreach (var entityType in builder.Model.GetEntityTypes())
         {
             if (typeof(DomainEntity).IsAssignableFrom(entityType.ClrType))

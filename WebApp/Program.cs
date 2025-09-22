@@ -2,6 +2,7 @@ using System.Text;
 using Domain;
 using Domain.Database;
 using Domain.Database.Contracts;
+using Domain.Database.UOW;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

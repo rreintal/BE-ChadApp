@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Mail;
@@ -6,7 +5,6 @@ using System.Security.Claims;
 using Domain;
 using Domain.Database.Contracts;
 using Helpers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

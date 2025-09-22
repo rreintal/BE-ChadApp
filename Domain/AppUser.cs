@@ -5,5 +5,5 @@ namespace Domain;
 
 public class AppUser : IdentityUser<Guid>, IDomainEntityId<Guid>
 {
-    public ICollection<AppRefreshToken>? AppRefreshTokens { get; set; }
+    public ICollection<AppRefreshToken> AppRefreshTokens { get; set; } = new List<AppRefreshToken>();
 }

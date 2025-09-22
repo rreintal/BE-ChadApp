@@ -1,7 +1,7 @@
 using Domain.Database.Contracts;
 using Domain.Database.Repositories;
 
-namespace Domain.Database;
+namespace Domain.Database.UOW;
 
 public class AppUOW : IAppUow
 {
