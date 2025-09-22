@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241230201150_MigrationName2")]
-    partial class MigrationName2
+    [Migration("20250922195555_fresh")]
+    partial class fresh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,33 +24,6 @@ namespace Domain.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.ActivitySet", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("NOW()");
-
-                    b.Property<int>("Repetitions")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("SessionExerciseId")
-                        .HasColumnType("uuid");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionExerciseId");
-
-                    b.ToTable("Set");
-                });
 
             modelBuilder.Entity("Domain.AppRefreshToken", b =>
                 {
@@ -149,7 +122,7 @@ namespace Domain.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Exercise", b =>
+            modelBuilder.Entity("Domain.Domain.Exercise", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,46 +135,23 @@ namespace Domain.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("Domain.Session", b =>
+            modelBuilder.Entity("Domain.Domain.SessionExercise", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("NOW()");
-
-                    b.Property<Guid>("SessionTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SessionTypeId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Sessions");
-                });
-
-            modelBuilder.Entity("Domain.SessionExercise", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ActivitySetId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -212,7 +162,16 @@ namespace Domain.Migrations
                     b.Property<Guid>("ExerciseId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("SessionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Skipped")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("WorkoutExerciseId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -221,10 +180,51 @@ namespace Domain.Migrations
 
                     b.HasIndex("SessionId");
 
-                    b.ToTable("HasActivitySets");
+                    b.HasIndex("WorkoutExerciseId");
+
+                    b.ToTable("SessionExercises");
                 });
 
-            modelBuilder.Entity("Domain.SessionType", b =>
+            modelBuilder.Entity("Domain.Domain.SetRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<decimal?>("RPE")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("Reps")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("SessionExerciseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("SetIndex")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Skipped")
+                        .HasColumnType("boolean");
+
+                    b.Property<decimal?>("Weight")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionExerciseId");
+
+                    b.ToTable("SetRecords");
+                });
+
+            modelBuilder.Entity("Domain.Domain.Workout", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,9 +239,117 @@ namespace Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("WorkoutPlanId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.ToTable("SessionTypes");
+                    b.HasIndex("WorkoutPlanId");
+
+                    b.ToTable("Workouts");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutExercise", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<Guid>("ExerciseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TargetReps")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TargetSets")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("WorkoutId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("WorkoutExercises");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkoutPlans");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<DateTime?>("EndedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WorkoutId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("WorkoutSessions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -374,17 +482,6 @@ namespace Domain.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.ActivitySet", b =>
-                {
-                    b.HasOne("Domain.SessionExercise", "SessionExercise")
-                        .WithMany("ActivitySet")
-                        .HasForeignKey("SessionExerciseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("SessionExercise");
-                });
-
             modelBuilder.Entity("Domain.AppRefreshToken", b =>
                 {
                     b.HasOne("Domain.AppUser", "AppUser")
@@ -396,42 +493,111 @@ namespace Domain.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Domain.Session", b =>
+            modelBuilder.Entity("Domain.Domain.Exercise", b =>
                 {
-                    b.HasOne("Domain.SessionType", "SessionType")
-                        .WithMany("Sessions")
-                        .HasForeignKey("SessionTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Domain.AppUser", "User")
-                        .WithMany("Sessions")
+                        .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("SessionType");
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.SessionExercise", b =>
+            modelBuilder.Entity("Domain.Domain.SessionExercise", b =>
                 {
-                    b.HasOne("Domain.Exercise", "Exercise")
+                    b.HasOne("Domain.Domain.Exercise", "Exercise")
                         .WithMany("SessionExercises")
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Session", "Session")
-                        .WithMany("Exercises")
+                    b.HasOne("Domain.Domain.WorkoutSession", "Session")
+                        .WithMany("SessionExercises")
                         .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Domain.WorkoutExercise", "WorkoutExercise")
+                        .WithMany("SessionExercises")
+                        .HasForeignKey("WorkoutExerciseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("Session");
+
+                    b.Navigation("WorkoutExercise");
+                });
+
+            modelBuilder.Entity("Domain.Domain.SetRecord", b =>
+                {
+                    b.HasOne("Domain.Domain.SessionExercise", "SessionExercise")
+                        .WithMany("SetRecords")
+                        .HasForeignKey("SessionExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SessionExercise");
+                });
+
+            modelBuilder.Entity("Domain.Domain.Workout", b =>
+                {
+                    b.HasOne("Domain.Domain.WorkoutPlan", "WorkoutPlan")
+                        .WithMany("Workouts")
+                        .HasForeignKey("WorkoutPlanId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("WorkoutPlan");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutExercise", b =>
+                {
+                    b.HasOne("Domain.Domain.Exercise", "Exercise")
+                        .WithMany("WorkoutExercises")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Domain.Workout", "Workout")
+                        .WithMany("WorkoutExercises")
+                        .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Exercise");
 
-                    b.Navigation("Session");
+                    b.Navigation("Workout");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutPlan", b =>
+                {
+                    b.HasOne("Domain.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutSession", b =>
+                {
+                    b.HasOne("Domain.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Domain.Workout", "Workout")
+                        .WithMany("WorkoutSessions")
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -488,28 +654,40 @@ namespace Domain.Migrations
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
                     b.Navigation("AppRefreshTokens");
-
-                    b.Navigation("Sessions");
                 });
 
-            modelBuilder.Entity("Domain.Exercise", b =>
+            modelBuilder.Entity("Domain.Domain.Exercise", b =>
+                {
+                    b.Navigation("SessionExercises");
+
+                    b.Navigation("WorkoutExercises");
+                });
+
+            modelBuilder.Entity("Domain.Domain.SessionExercise", b =>
+                {
+                    b.Navigation("SetRecords");
+                });
+
+            modelBuilder.Entity("Domain.Domain.Workout", b =>
+                {
+                    b.Navigation("WorkoutExercises");
+
+                    b.Navigation("WorkoutSessions");
+                });
+
+            modelBuilder.Entity("Domain.Domain.WorkoutExercise", b =>
                 {
                     b.Navigation("SessionExercises");
                 });
 
-            modelBuilder.Entity("Domain.Session", b =>
+            modelBuilder.Entity("Domain.Domain.WorkoutPlan", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("Workouts");
                 });
 
-            modelBuilder.Entity("Domain.SessionExercise", b =>
+            modelBuilder.Entity("Domain.Domain.WorkoutSession", b =>
                 {
-                    b.Navigation("ActivitySet");
-                });
-
-            modelBuilder.Entity("Domain.SessionType", b =>
-                {
-                    b.Navigation("Sessions");
+                    b.Navigation("SessionExercises");
                 });
 #pragma warning restore 612, 618
         }
