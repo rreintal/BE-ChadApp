@@ -85,4 +85,23 @@ public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
             }
         }
     }
+    
+    // MARK: - Seeding
+
+    // TODO: read from file?
+    public async Task SeedDataAsync()
+    {
+        if (!Exercises.Any())
+        {
+            Exercises.AddRange(new Exercise() { Name = "Bench press"},
+                new Exercise() { Name = "Incline bench press"},
+                new Exercise() { Name = "Shoulder press"},
+                new Exercise() { Name = "Lat pulldown"},
+                new Exercise() { Name = "Bicep curl"},
+                new Exercise() { Name = "Hammer curl"}
+                );
+
+            await SaveChangesAsync();
+        }
+    }
 }

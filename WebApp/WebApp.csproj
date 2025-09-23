@@ -24,6 +24,7 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Helpers\Helpers.csproj" />
       <ProjectReference Include="..\Public.DTO\Public.DTO.csproj" />
+      <ProjectReference Include="..\Services\Services.csproj" />
     </ItemGroup>
 
 </Project>

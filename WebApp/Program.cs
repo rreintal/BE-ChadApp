@@ -31,6 +31,7 @@ if (connectionString == null)
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(connectionString, opt => {});
+    
 });
 
 // ------------------------
@@ -67,6 +68,13 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+
+await using(var serviceScope = app.Services.CreateAsyncScope())
+await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>())
+{
+    await dbContext.Database.EnsureCreatedAsync();
+    await dbContext.SeedDataAsync();
+}
 
 // TODO: Remove later
 /*builder.Services.AddCors(options =>

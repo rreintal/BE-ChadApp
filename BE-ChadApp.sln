@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public.DTO", "Public.DTO\Pu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{D4BF1CB9-67A2-44E9-A2D8-4FA1DD65F578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{77AF075D-CA79-4C67-8833-3D35E0636EFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{D4BF1CB9-67A2-44E9-A2D8-4FA1DD65F578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4BF1CB9-67A2-44E9-A2D8-4FA1DD65F578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4BF1CB9-67A2-44E9-A2D8-4FA1DD65F578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77AF075D-CA79-4C67-8833-3D35E0636EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AF075D-CA79-4C67-8833-3D35E0636EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AF075D-CA79-4C67-8833-3D35E0636EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AF075D-CA79-4C67-8833-3D35E0636EFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
