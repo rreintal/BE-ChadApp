@@ -21,6 +21,6 @@ public class ExercisesController : ControllerBase
     public async Task<ActionResult<IEnumerable<GetExercise>>> Get()
     {
         var result = (await _DbContext.Exercises.ToListAsync()).Select(e => ExerciseMapper.Map(e));
-        return Ok(result);
+        return Ok(result); 
     }
 }
