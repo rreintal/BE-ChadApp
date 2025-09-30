@@ -4,7 +4,7 @@ namespace Tests;
 
 public abstract class TestBase
 {
-    protected T GetDto<T>(string name)
+    protected static T GetDto<T>(string name)
     {
         var path = Path.Combine(AppContext.BaseDirectory, "Data", typeof(T).Name, $"{name}.json");
         var json = File.ReadAllText(path);

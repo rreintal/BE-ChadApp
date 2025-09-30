@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Security.Claims;
 using Domain;
 using Domain.Database.Contracts;
+using Domain.Domain;
 using Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

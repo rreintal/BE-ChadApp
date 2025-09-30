@@ -4,7 +4,7 @@ using Public.DTO;
 
 namespace Services;
 
-public class ExerciseMapper
+public static class ExerciseMapper
 {
     public static GetExercise Map(Exercise exercise)
     {

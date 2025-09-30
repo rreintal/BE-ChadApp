@@ -3,10 +3,13 @@ using Domain;
 using Domain.Database;
 using Domain.Database.Contracts;
 using Domain.Database.UOW;
+using Domain.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Services;
+using Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +42,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Dependency injection
 builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IAppUow, AppUOW>();
+builder.Services.AddScoped<IPlanService, PlanService>();
 
 // Identity
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(

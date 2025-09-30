@@ -1,4 +1,5 @@
 using Domain.Database.Contracts;
+using Domain.Domain;
 
 namespace Domain;
 
