@@ -43,6 +43,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IAppUow, AppUOW>();
 builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 // Identity
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(

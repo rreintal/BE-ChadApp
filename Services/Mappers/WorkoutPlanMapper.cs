@@ -5,14 +5,19 @@ namespace Services.Mappers;
 
 public static class WorkoutPlanMapper
 {
-    public static PlanDto Map(WorkoutPlan plan)
+    public static WorkoutPlanDto Map(WorkoutPlan plan)
     {
-        return new PlanDto()
+        return new WorkoutPlanDto()
         {
             Id = plan.Id,
             Name = plan.Name,
             Description = plan.Description,
-            CreatedAt = plan.CreatedAt
+            CreatedAt = plan.CreatedAt,
+            Workouts = plan.Workouts.Select(w => new PlanWorkoutDto()
+            {
+                Id = w.Id,
+                Name = w.Name
+            }).ToList()
         };
     }
 }

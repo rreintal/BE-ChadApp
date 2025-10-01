@@ -11,7 +11,7 @@ public class PlanService(AppDbContext dbContext) : IPlanService
 {
     private readonly AppDbContext _dbContext = dbContext;
 
-    public async Task<PlanDto> CreatePlan(Guid userId, CreatePlanRequest dto)
+    public async Task<WorkoutPlanDto> CreatePlan(Guid userId, CreateWorkoutPlanRequest dto)
     {
         var isNameExists =
             await _dbContext.WorkoutPlans
@@ -31,7 +31,7 @@ public class PlanService(AppDbContext dbContext) : IPlanService
 
         var result = await _dbContext.WorkoutPlans.AddAsync(plan);
         await _dbContext.SaveChangesAsync();
-        return new PlanDto()
+        return new WorkoutPlanDto()
         {
             Id = result.Entity.Id,
             CreatedAt = result.Entity.CreatedAt,
@@ -40,9 +40,11 @@ public class PlanService(AppDbContext dbContext) : IPlanService
         };
     }
 
-    public async Task<IEnumerable<PlanDto>> GetAllPlansList(Guid userId)
+    public async Task<IEnumerable<WorkoutPlanDto>> GetAllPlansList(Guid userId)
     {
-        var items = await _dbContext.WorkoutPlans.Where(p => p.UserId == userId).ToListAsync();
+        var items = await _dbContext.WorkoutPlans.Where(p => p.UserId == userId)
+            .Include(p => p.Workouts)
+            .ToListAsync();
         return items.Select(WorkoutPlanMapper.Map);
     }
 }

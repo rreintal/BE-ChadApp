@@ -4,6 +4,6 @@ namespace Services.Contracts;
 
 public interface IPlanService
 {
-    public Task<PlanDto> CreatePlan(Guid userId, CreatePlanRequest dto);
-    public Task<IEnumerable<PlanDto>> GetAllPlansList(Guid userId);
+    public Task<WorkoutPlanDto> CreatePlan(Guid userId, CreateWorkoutPlanRequest dto);
+    public Task<IEnumerable<WorkoutPlanDto>> GetAllPlansList(Guid userId);
 }

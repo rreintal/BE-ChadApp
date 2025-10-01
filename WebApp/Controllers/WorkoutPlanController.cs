@@ -11,12 +11,12 @@ namespace BE_ChadApp.Controllers;
 [Route("api/v1/[controller]")]
 [ApiController]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-public class PlanController(IPlanService planService) : ControllerBase
+public class WorkoutPlanController(IPlanService planService) : ControllerBase
 {
     private IPlanService PlanService { get; set; } = planService;
 
     [HttpPost("New")]
-    public async Task<IActionResult> CreatePlan([FromBody] CreatePlanRequest data)
+    public async Task<IActionResult> CreatePlan([FromBody] CreateWorkoutPlanRequest data)
     {
         var userId = User.GetUserId();
         var plan = await PlanService.CreatePlan(userId: userId, dto: data);
