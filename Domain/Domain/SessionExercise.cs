@@ -14,8 +14,8 @@ public class SessionExercise : DomainEntity
     public WorkoutExercise? WorkoutExercise { get; set; }
 
     public int Position { get; set; }
-
     public bool Skipped { get; set; }
 
     public ICollection<SetRecord> SetRecords { get; set; } = new List<SetRecord>();
 }
+
