@@ -44,6 +44,7 @@ builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IAppUow, AppUOW>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 
 // Identity
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(
