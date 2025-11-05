@@ -16,4 +16,7 @@ public class WorkoutSession : DomainEntity
     
     public string? Notes { get; set; }
 
+    public bool Completed { get; set; }
+
+    // TODO: add FINISHED prop
 }
